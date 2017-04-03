@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+#* Velocity variables (identified by the $ character) are generated at
+runtime by the server. *#
+<!--
+	Copyright 2017 the Procter & Gamble Company
+	
+	Licensed under the Apache License, Version 2.0 (the "License");
+	you may not use this file except in compliance with the License.
+	You may obtain a copy of the License at
+	
+	  http://www.apache.org/licenses/LICENSE-2.0
+	
+	Unless required by applicable law or agreed to in writing, software
+	distributed under the License is distributed on an "AS IS" BASIS,
+	WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+	See the License for the specific language governing permissions and
+	limitations under the License. 
+-->
+
+<!-- template name: sap.system.selector.template.html -->
+
+<html lang="$locale.getLanguage()" dir="ltr">
+<head>
+<title>$sapTokenAdapterTemplateMessages.getMessage("title")</title>
+<meta http-equiv="x-ua-compatible" content="IE=edge">
+<base href="$PingFedBaseURL" />
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="viewport"
+	content="initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<link
+	href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'"
+	type="text/css" rel="stylesheet">
+<link rel="stylesheet" type="text/css"
+	href="assets/css/pg.prof.main.css" />
+
+<style>
+@keyframes bar_load_up {
+    0% {height:100px;}
+    50% {height:100px;}
+    100% {height:100px;}
+}
+
+@keyframes logo_up{
+    0% {top:50px;}
+    60% {top:50px;}
+    100% {top:50px;}
+}
+
+select {
+	-webkit-appearance: button;
+	-webkit-border-radius: 2px;
+	-webkit-box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1);
+	-webkit-padding-end: 20px;
+	-webkit-padding-start: 2px;
+	-webkit-user-select: none;
+	background-image: url(http://i62.tinypic.com/15xvbd5.png),
+		-webkit-linear-gradient(#FAFAFA, #F4F4F4 40%, #E5E5E5);
+	background-position: 97% center;
+	background-repeat: no-repeat;
+	border: 1px solid #AAA;
+	font-size: inherit;
+	margin-top: 20px;
+	overflow: hidden;
+	padding: 5px 10px;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	width: 100%;
+}
+</style>
+</head>
+<body>
+	<div id="top"></div>
+	<div id="loginBox">
+		<img src="assets/images/pg_logo_u13.png" id="pg" />
+		<div id="fields">
+			<form method="POST" action="$url" autocomplete="off">
+				<div id="fc" style="display: none">$filecontent</div>
+				<p style="margin-top: 20px;">Open the SAP shortcut file which
+					was just automatically downloaded to launch the SAP GUI.</p>
+
+				<p style="margin-top: 20px;">When the file opens you will see a
+					message like this image. Just click "OK".</p>
+
+				<img style="margin-top: 20px; width: 100%"
+					src="assets/images/shortcut_incomplete.png" />
+
+				<p style="margin-top: 20px;">Select the system you want to
+					connect via the System Description field, then the client. In a few
+					moments, if the selected system has been set up correctly, you
+					should be signed into the SAP GUI. Feel free to close this window
+					at any time.</p>
+
+				<img style="margin-top: 20px; width: 100%"
+					src="assets/images/select_system.png" />
+			</form>
+		</div>
+		<!-- end of fields div -->
+	</div>
+	<!-- end of loginBox div -->
+	<script type="text/javascript">
+		(function(root, factory) {
+			if (typeof define === 'function' && define.amd) {
+				// AMD. Register as an anonymous module.
+				define([], factory);
+			} else if (typeof exports === 'object') {
+				// Node. Does not work with strict CommonJS, but
+				// only CommonJS-like environments that support module.exports,
+				// like Node.
+				module.exports = factory();
+			} else {
+				// Browser globals (root is window)
+				root.download = factory();
+			}
+		}
+				(
+						this,
+						function() {
+
+							return function download(data, strFileName,
+									strMimeType) {
+
+								var self = window, // this script is only for browsers anyway...
+								defaultMime = "application/octet-stream", // this default mime also triggers iframe downloads
+								mimeType = strMimeType || defaultMime, payload = data, url = !strFileName
+										&& !strMimeType && payload, anchor = document
+										.createElement("a"), toString = function(
+										a) {
+									return String(a);
+								}, myBlob = (self.Blob || self.MozBlob
+										|| self.WebKitBlob || toString), fileName = strFileName
+										|| "download", blob, reader;
+								myBlob = myBlob.call ? myBlob.bind(self) : Blob;
+
+								if (String(this) === "true") { //reverse arguments, allowing download.bind(true, "text/xml", "export.xml") to act as a callback
+									payload = [ payload, mimeType ];
+									mimeType = payload[0];
+									payload = payload[1];
+								}
+
+								if (url && url.length < 2048) { // if no filename and no mime, assume a url was passed as the only argument
+									fileName = url.split("/").pop().split("?")[0];
+									anchor.href = url; // assign href prop to temp anchor
+									if (anchor.href.indexOf(url) !== -1) { // if the browser determines that it's a potentially valid url path:
+										var ajax = new XMLHttpRequest();
+										ajax.open("GET", url, true);
+										ajax.responseType = 'blob';
+										ajax.onload = function(e) {
+											download(e.target.response,
+													fileName, defaultMime);
+										};
+										setTimeout(function() {
+											ajax.send();
+										}, 0); // allows setting custom ajax headers using the return:
+										return ajax;
+									} // end if valid url?
+								} // end if url?
+
+								//go ahead and download dataURLs right away
+								if (/^data\:[\w+\-]+\/[\w+\-]+[,;]/
+										.test(payload)) {
+
+									if (payload.length > (1024 * 1024 * 1.999)
+											&& myBlob !== toString) {
+										payload = dataUrlToBlob(payload);
+										mimeType = payload.type || defaultMime;
+									} else {
+										return navigator.msSaveBlob ? // IE10 can't do a[download], only Blobs:
+										navigator.msSaveBlob(
+												dataUrlToBlob(payload),
+												fileName) : saver(payload); // everyone else can save dataURLs un-processed
+									}
+
+								}//end if dataURL passed?
+
+								blob = payload instanceof myBlob ? payload
+										: new myBlob([ payload ], {
+											type : mimeType
+										});
+
+								function dataUrlToBlob(strUrl) {
+									var parts = strUrl.split(/[:;,]/), type = parts[1], decoder = parts[2] == "base64" ? atob
+											: decodeURIComponent, binData = decoder(parts
+											.pop()), mx = binData.length, i = 0, uiArr = new Uint8Array(
+											mx);
+
+									for (i; i < mx; ++i)
+										uiArr[i] = binData.charCodeAt(i);
+
+									return new myBlob([ uiArr ], {
+										type : type
+									});
+								}
+
+								function saver(url, winMode) {
+
+									if ('download' in anchor) { //html5 A[download]
+										anchor.href = url;
+										anchor.setAttribute("download",
+												fileName);
+										anchor.className = "download-js-link";
+										anchor.innerHTML = "downloading...";
+										anchor.style.display = "none";
+										document.body.appendChild(anchor);
+										setTimeout(
+												function() {
+													anchor.click();
+													document.body
+															.removeChild(anchor);
+													if (winMode === true) {
+														setTimeout(
+																function() {
+																	self.URL
+																			.revokeObjectURL(anchor.href);
+																}, 250);
+													}
+												}, 66);
+										return true;
+									}
+
+									// handle non-a[download] safari as best we can:
+									if (/(Version)\/(\d+)\.(\d+)(?:\.(\d+))?.*Safari\//
+											.test(navigator.userAgent)) {
+										url = url.replace(
+												/^data:([\w\/\-\+]+)/,
+												defaultMime);
+										if (!window.open(url)) { // popup blocked, offer direct download:
+											if (confirm("Displaying New Document\n\nUse Save As... to download, then click back to return to this page.")) {
+												location.href = url;
+											}
+										}
+										return true;
+									}
+
+									//do iframe dataURL download (old ch+FF):
+									var f = document.createElement("iframe");
+									document.body.appendChild(f);
+
+									if (!winMode) { // force a mime that will download:
+										url = "data:"
+												+ url.replace(
+														/^data:([\w\/\-\+]+)/,
+														defaultMime);
+									}
+									f.src = url;
+									setTimeout(function() {
+										document.body.removeChild(f);
+									}, 333);
+
+								}//end saver
+
+								if (navigator.msSaveBlob) { // IE10+ : (has Blob, but not a[download] or URL)
+									return navigator.msSaveBlob(blob, fileName);
+								}
+
+								if (self.URL) { // simple fast and modern way using Blob and URL:
+									saver(self.URL.createObjectURL(blob), true);
+								} else {
+									// handle non-Blob()+non-URL browsers:
+									if (typeof blob === "string"
+											|| blob.constructor === toString) {
+										try {
+											return saver("data:" + mimeType
+													+ ";base64,"
+													+ self.btoa(blob));
+										} catch (y) {
+											return saver("data:" + mimeType
+													+ ","
+													+ encodeURIComponent(blob));
+										}
+									}
+
+									// Blob but not URL support:
+									reader = new FileReader();
+									reader.onload = function(e) {
+										saver(this.result);
+									};
+									reader.readAsDataURL(blob);
+								}
+								return true;
+							}; /* end download() */
+						}));
+		
+		function downloadFile(filename, elId, mimeType) {
+
+			// 			var e = document.getElementById("system");
+			// 			var sys = e.options[e.selectedIndex].value;
+
+			// 			var c = document.getElementById("client");
+			// 			var client = c.options[c.selectedIndex].value;
+
+			var elHtml = document.getElementById(elId).innerHTML;
+			//elHtml = elHtml.replace("SAPSYS", sys);			
+			//elHtml = elHtml.replace("CLIENT", client);
+
+			elHtml = elHtml.replace(/<br\s*[\/]?>/gi, "\n");
+
+			download("data:" + mimeType + ";charset=utf-8,"
+					+ encodeURIComponent(elHtml), filename,
+					mimeType);
+		}
+
+		downloadFile('SAPGUISSO.sap', 'fc', 'application/x-sapshortcut');
+	</script>
+</body>
+</html>
