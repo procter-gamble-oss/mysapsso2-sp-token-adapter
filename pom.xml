@@ -18,7 +18,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.pg.security</groupId>
 	<artifactId>mysapsso2-sp-token-adapter</artifactId>
-	<version>1.0-SNAPSHOT</version>
+	<version>0.1</version>
 	<name>MYSAPSSO2 SP Token Adapter</name>
 	<description>PingFederate MYSAPSSO2 Integration</description>
 
@@ -52,7 +52,9 @@
 		<dependency>
 			<groupId>com.pingidentity</groupId>
 			<artifactId>pf-protocolengine.jar</artifactId>
+			<!-- replace with your ping federate version -->
 			<version>8.3.0.1</version>
+			<!-- download your pf-protocolengine.jar to the /lib directory or store this jar file in your private maven repo-->
 			<systemPath>${project.basedir}/lib/pf-protocolengine.jar</systemPath>
 			<scope>system</scope>
 		</dependency>
