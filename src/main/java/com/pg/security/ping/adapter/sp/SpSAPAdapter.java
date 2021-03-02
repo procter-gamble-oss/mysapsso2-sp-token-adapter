@@ -53,7 +53,7 @@ import com.pingidentity.sdk.template.TemplateRendererUtilException;
  * append a MYSAPSSO2 cookie to requests coming through the IdP adapter policy
  * stack.
  * 
- * @author hesse.cd
+ * @author cdhesse
  *
  */
 public class SpSAPAdapter implements SpAuthenticationAdapter {
@@ -335,8 +335,7 @@ public class SpSAPAdapter implements SpAuthenticationAdapter {
 		// TODO: If this becomes a Ping offered adapter, you may want to give
 		// the option of specifying
 		// SAP SID's (system id's) and client numbers as drop downs. You will
-		// have to tie them together however
-		// e.g. "NP3 - 100", "NP3 - 200", "NP2 - 400"
+		// have to tie them together
 
 		// Create an AdapterConfigurationGuiDescriptor that will tell
 		// PingFederate how to render a configuration

@@ -72,20 +72,14 @@ select {
 		<div id="fields">
 			<form method="POST" action="$url" autocomplete="off">
 				<div id="fc" style="display: none">$filecontent</div>
-				<p style="margin-top: 20px;">Open the SAP shortcut file which
-					was just automatically downloaded to launch the SAP GUI.</p>
+				<p style="margin-top: 20px;">$sapTokenAdapterTemplateMessages.getMessage("open_shortcut")</p>
 
-				<p style="margin-top: 20px;">When the file opens you will see a
-					message like this image. Just click "OK".</p>
+				<p style="margin-top: 20px;">$sapTokenAdapterTemplateMessages.getMessage("when_file_opens")</p>
 
 				<img style="margin-top: 20px; width: 100%"
 					src="assets/images/shortcut_incomplete.png" />
 
-				<p style="margin-top: 20px;">Select the system you want to
-					connect via the System Description field, then the client. In a few
-					moments, if the selected system has been set up correctly, you
-					should be signed into the SAP GUI. Feel free to close this window
-					at any time.</p>
+				<p style="margin-top: 20px;">$sapTokenAdapterTemplateMessages.getMessage("when_file_opens_desc")</p>
 
 				<img style="margin-top: 20px; width: 100%"
 					src="assets/images/select_system.png" />

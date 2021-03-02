@@ -51,7 +51,7 @@ import com.pingidentity.access.KeyAccessor;
  * TicketCreator class creates and signs a byte[] with a pcks#7/CMS signature
  * and then base64 encodes it.
  *
- * @author hesse.cd
+ * @author cdhesse
  *
  */
 public class TicketCreator {
