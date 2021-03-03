@@ -3,16 +3,8 @@
 </h1>
 
 <p align="center" style="font-size: 1.2rem;"> 
-    This code provides Ping Federate SAP SSO Integration to Java and ABAP backend stacks without the need for the Netweaver Gateway to create MYSAPSSO2 cookies.  
-    <br/>
-    Imbedded in this repository is the <code>TicketCreator.java</code> class, which is a stand-alone java class which generates the MYSAPSSO2 cookie, and thus could be used multiple integration types.
-    <br/>
-    This repository gives a template for allowing SAP GUI SSO login via downloading an SAP GUI Shortcut file, but the primary use could be for enabling API calls to SAP, authenticated through Ping Federate, with SSO passthrough to the SAP backend without needing to redirect off of a SAP Netweaver Portal (Java) system.
-</p>
-
-<p align="center">
-
-</p>
+    This code provides Ping Federate SAP SSO Integration to Java and ABAP backend stacks without the need for the Netweaver Gateway to create MYSAPSSO2 cookies. Embedded in this repository is the <code>TicketCreator.java</code> class, which is a stand-alone java class which generates the MYSAPSSO2 cookie, and thus could be used multiple integration types.
+</p> 
 
 ## Summary
 This solution provides SAP SSO for web applications such as the SAP Portal, and SAP Fiori applications, as well as thick client SAP application such as the SAP GUI.  The solution is HTTPS throughout, so credentials are always encrypted.  MFA of course could be added via the Ping Federate authentication policy setup.
@@ -46,7 +38,7 @@ You can continue to use SNC for encrypting the SAP GUI traffic with either the S
 
 # User Experience for SAP GUI
 
-Open browser and navigate to https://<pingfederatehostname>:<port>/sp/startSSO.ping?SpSessionAuthnAdapterId=SAPGUI or deploy this a web browser shortcut to the users desktop.  Double clicking this shortcut will launch the users default web browser 
+Open browser and navigate to https://pingfedhost.yourcompany.com/sp/startSSO.ping?SpSessionAuthnAdapterId=SAPGUI or deploy this a web browser shortcut to the users desktop.  Double clicking this shortcut will launch the users default web browser 
 
 Example: 
 
@@ -67,6 +59,6 @@ PICTURES
 # User experience for SAP web applications (Fiori or other SAP proprietary web application technologies like ITS)
 Simply use the following URL and provide the appropriate TargetResource. 
 
-https://<pingfederatehostname>:<port>/sp/startSSO.ping?SpSessionAuthnAdapterId=SAPGUI&TargetResource=<TargetWebURL> 
+https://pingfedhost.yourcompany.com/sp/startSSO.ping?SpSessionAuthnAdapterId=SAPGUI&TargetResource=<TargetWebURL> 
 
-Example:  To generate a MYSAPSSO2 cookie for the web application located at http://yourapp.com, simply use this URL.  https://<pingfederatehostname>:<port>/sp/startSSO.ping?SpSessionAuthnAdapterId=SAPGUI&TargetResource=http://yourapp.com 
+Example:  To generate a MYSAPSSO2 cookie for the web application located at http://yourapp.com, simply use this URL.  https://pingfedhost.yourcompany.com/sp/startSSO.ping?SpSessionAuthnAdapterId=SAPGUI&TargetResource=http://yourapp.com 
