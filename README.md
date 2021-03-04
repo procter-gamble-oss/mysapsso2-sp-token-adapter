@@ -2,8 +2,11 @@
     mysapsso2-sp-token-adapter
 </h1>
 
-<p align="center" style="font-size: 1.2rem;"> 
-    This code provides Ping Federate SAP SSO Integration to Java and ABAP backend stacks without the need for the Netweaver Gateway to create MYSAPSSO2 cookies. Embedded in this repository is the <code>TicketCreator.java</code> class, which is a stand-alone java class which generates the MYSAPSSO2 cookie, and thus could be used multiple integration types.
+<p align="left" style="font-size: 1.2rem;"> 
+This code provides Ping Federate SAP SSO Integration to Java and ABAP backend stacks without the need for the Netweaver Gateway to create MYSAPSSO2 cookies. This provides ability to have federated authentication (including MFA and any other authorization flow you desire) for the SAP thick client (SAP GUI) or any SAP hosted web application.
+</p>
+<p align="left" style="font-size: 1.2rem;">
+Embedded in this repository is the <code>TicketCreator.java</code> class, which is a stand-alone java class which generates the MYSAPSSO2 cookie, and thus could be used multiple integration types.
 </p> 
 
 ## Summary
